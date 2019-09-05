@@ -1,0 +1,27 @@
+@import '../../scss/common.scss';
+
+.f3d-autocomplete{
+    position: relative;
+    margin-top: 2rem;
+    background: #eeeeee;
+    padding: 16px 48px 16px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.78);
+    @include standardizeFont();
+    &-input{
+        box-sizing: border-box;
+        background: #eeeeee;
+        border: none;
+        margin-right: auto;
+    }
+}
+
+.chips-wrapper{
+    width: 100%;
+}

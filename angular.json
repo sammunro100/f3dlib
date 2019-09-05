@@ -2,5 +2,154 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "F3D-lib": {
+      "projectType": "library",
+      "root": "projects/f3d-lib",
+      "sourceRoot": "projects/f3d-lib/src",
+      "prefix": "f3d",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/f3d-lib/tsconfig.lib.json",
+            "project": "projects/f3d-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/f3d-lib/src/test.ts",
+            "tsConfig": "projects/f3d-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/f3d-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/f3d-lib/tsconfig.lib.json",
+              "projects/f3d-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "f3d-lib-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/f3d-lib-app",
+      "sourceRoot": "projects/f3d-lib-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/f3d-lib-app",
+            "index": "projects/f3d-lib-app/src/index.html",
+            "main": "projects/f3d-lib-app/src/main.ts",
+            "polyfills": "projects/f3d-lib-app/src/polyfills.ts",
+            "tsConfig": "projects/f3d-lib-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/f3d-lib-app/src/favicon.ico",
+              "projects/f3d-lib-app/src/assets"
+            ],
+            "styles": [
+              "projects/f3d-lib-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/f3d-lib-app/src/environments/environment.ts",
+                  "with": "projects/f3d-lib-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "f3d-lib-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "f3d-lib-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "f3d-lib-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/f3d-lib-app/src/test.ts",
+            "polyfills": "projects/f3d-lib-app/src/polyfills.ts",
+            "tsConfig": "projects/f3d-lib-app/tsconfig.spec.json",
+            "karmaConfig": "projects/f3d-lib-app/karma.conf.js",
+            "assets": [
+              "projects/f3d-lib-app/src/favicon.ico",
+              "projects/f3d-lib-app/src/assets"
+            ],
+            "styles": [
+              "projects/f3d-lib-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/f3d-lib-app/tsconfig.app.json",
+              "projects/f3d-lib-app/tsconfig.spec.json",
+              "projects/f3d-lib-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/f3d-lib-app/e2e/protractor.conf.js",
+            "devServerTarget": "f3d-lib-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "f3d-lib-app:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "F3D-lib"
 }

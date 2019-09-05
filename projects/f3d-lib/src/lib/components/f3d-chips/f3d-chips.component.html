@@ -1,0 +1,10 @@
+<div class="f3d-chips">
+    <div class="f3d-chip" *ngFor="let chip of chips">
+        <p class="f3d-chip-key" *ngIf="chip.key">{{chip.key}}:</p>
+        <p class="f3d-chip-content">{{chip.displayValue}}</p>
+        <i class="material-icons f3d-chip-remove" (click)="removeChip(chip)">close</i>
+    </div>
+    <div style="flex: 1">
+        <f3d-input (keyup.enter)="addChip($event.target)" #f3dInput (clearChips)="clearChips()" (searchString)="emitSearchString($event)"></f3d-input>
+    </div>
+</div>

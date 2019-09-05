@@ -1,0 +1,25 @@
+@import '../../scss/common.scss';
+
+.input-box{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.f3d-input{
+    background: #eeeeee;
+    width: 100%;
+    box-sizing: border-box;
+    height: 24px;
+    border: none;
+    font-size: 14px;
+    padding-right: 24px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.78);
+    @include standardizeFont();
+    &-clear{
+        position: absolute;
+        right: 0;
+        z-index: 10;
+    }
+} 

@@ -1,0 +1,38 @@
+@import "../../scss/common.scss";
+
+.f3d-chips{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+
+.f3d-chip {
+  padding: 4px 6px;
+  margin-right: 4px;
+  width: fit-content;
+  box-sizing: border-box;
+  height: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: solid 1px #cccccc;
+  display: flex;
+  &-key {
+    @include standardizeFont();
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.52);
+    margin-right: 6px;
+  }
+  &-content{
+    @include standardizeFont();
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    margin-right: 6px;
+  }
+  &-remove{
+      align-self: center;
+      font-size: 16px;
+      margin-top: 2px;
+  }
+}

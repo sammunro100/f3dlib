@@ -1,0 +1,14 @@
+<div class="f3d-autocomplete">
+ <f3d-chips class="chips-wrapper" 
+ [chips]="chips" 
+ (searchString)="captureSearchString($event)"
+ (chipQuery)="captureChipQuery($event)"
+ #chips
+ ></f3d-chips>
+</div>
+<f3d-options-dropdown (chipValue)="addToChips($event)" 
+[dataSet]="dataSet"
+[objectKeysConfig]="objectKeysConfig"
+[searchStringValue]="searchString"
+#options>
+</f3d-options-dropdown>

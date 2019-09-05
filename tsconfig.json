@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "f3d-lib": [
+        "dist/f3d-lib"
+      ],
+      "f3d-lib/*": [
+        "dist/f3d-lib/*"
+      ]
+    }
   }
 }

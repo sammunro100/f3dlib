@@ -1,0 +1,13 @@
+<div class="f3d-options" *ngIf="searchStringValue">
+    <div class="f3d-options-search">
+        Search for "{{searchStringValue}}"
+    </div>
+    <ng-container>
+        <ng-container *ngFor="let item of objectKeysConfig | keyvalue">
+            <dt *ngIf="displayDataHasKey(item.key)">{{item.key}}</dt>
+            <dl *ngFor="let ele of displayData">
+                <dd (click)="getValue(ele[item?.key], item?.key)" *ngIf="ele[item.key]">{{ele[item?.key]}}</dd>
+            </dl>
+        </ng-container>
+    </ng-container>
+</div>
