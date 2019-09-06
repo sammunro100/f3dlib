@@ -1,6 +1,6 @@
 
 <div class="input-box" [style.width]="width ? width + 'px' : 'auto'">
     <!-- <input type="text" class="f3d-input"> -->
-    <input class="f3d-input" (keyup)="emitSearchString($event.target.value)">
+    <input class="f3d-input" (keyup)="emitString($event.target.value)">
     <i class="material-icons f3d-input-clear" (click)="clearEventEmitter()">close</i>
 </div>

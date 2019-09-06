@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'f3d-chips',
@@ -10,7 +10,8 @@ export class F3dChipsComponent implements OnInit, OnChanges {
   @Input() chips;
   @Output() searchString = new EventEmitter();
   @Output() chipQuery = new EventEmitter();
-  chipQueryString = '';
+  chipQueryArray = [];
+  currentSearchString: string;
 
   constructor(
   ) { }
@@ -22,10 +23,20 @@ export class F3dChipsComponent implements OnInit, OnChanges {
     this.buildChipQuery();
   }
 
-  addChip(htmlElement) {
+  emitSearchString(searchString, event) {
+    if (searchString !== '' || event.key !== 'Enter') {
+      this.searchString.emit(searchString);
+      this.currentSearchString = searchString;
+      this.buildChipQuery();
+    }
+
+  }
+
+  addChip(htmlElement: HTMLInputElement) {
     this.chips.push({ displayValue: htmlElement.value });
     htmlElement.value = '';
-    this.emitSearchString('');
+    this.currentSearchString = '';
+    this.buildChipQuery();
   }
 
   removeChip(chip) {
@@ -33,28 +44,18 @@ export class F3dChipsComponent implements OnInit, OnChanges {
     this.buildChipQuery();
   }
 
-  clearChips() {
-    this.chips = [];
-    this.buildChipQuery();
-  }
 
-  emitSearchString(searchString) {
-    this.buildChipQuery(searchString);
-  }
-
-  buildChipQuery(searchString?) {
+  buildChipQuery() {
+    this.chipQueryArray = [];
     if (this.chips.length > 0) {
-      this.chipQueryString = '';
-      this.chips.forEach(ele => {
-        this.chipQueryString += `${ele.displayValue}`;
+      this.chips.forEach(chip => {
+        this.chipQueryArray.push(chip.displayValue);
       });
-      if (searchString !== undefined) {
-        this.chipQueryString += searchString;
-      }
-      if (this.chipQueryString !== undefined || searchString !== undefined) {
-        this.chipQuery.emit(this.chipQueryString);
-      }
     }
+    if (this.currentSearchString !== '') {
+      this.chipQueryArray.push(this.currentSearchString);
+    }
+    this.chipQuery.emit(this.chipQueryArray);
   }
 
 }

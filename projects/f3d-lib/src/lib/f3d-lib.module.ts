@@ -7,6 +7,7 @@ import { F3dChipsComponent } from './components/f3d-chips/f3d-chips.component';
 import { F3dAutocompleteComponent } from './components/f3d-autocomplete/f3d-autocomplete.component';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from './components/pipes/filter.pipe';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FilterPipe } from './components/pipes/filter.pipe';
     F3dChipsComponent,
     F3dAutocompleteComponent,
     FilterPipe,
+    AutocompleteComponent
   ],
   imports: [
     ReactiveFormsModule,

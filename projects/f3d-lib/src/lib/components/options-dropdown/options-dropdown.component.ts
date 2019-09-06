@@ -7,11 +7,13 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class OptionsDropdownComponent implements OnInit {
 
-  @Input() searchStringValue: string;
+  @Input() searchStringValue: [];
   @Input() dataSet: [];
   @Input() objectKeysConfig;
-  displayData;
+  displayData = []
   @Output() chipValue = new EventEmitter();
+  filterableKeys = ['name', 'tumour'];
+  tempArr = [];
 
   constructor(
   ) { }
@@ -20,8 +22,9 @@ export class OptionsDropdownComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.displayData = this.filter(this.searchStringValue);
-    this.filter(this.searchStringValue);
+    if (this.searchStringValue && this.searchStringValue.length > 0) {
+     this.filter();
+    }
   }
 
   getValue(ele, keyValue) {
@@ -31,24 +34,34 @@ export class OptionsDropdownComponent implements OnInit {
     });
   }
 
-  filter(searchTerm) {
-    if (this.dataSet !== undefined && searchTerm) {
-      const filterableKeys = ['name', 'tumour'];
-      const returnObj = [];
-      this.dataSet.map(item => {
-        for (const key of filterableKeys) {
+  filter() {
+    this.tempArr = this.matchesValue(this.dataSet, 0);
+    let count = 0;
+    while (count < this.searchStringValue.length - 1) {
+      count++;
+      this.tempArr = this.matchesValue(this.tempArr, count)
+    }
+  }
+
+  matchesValue(arr, index) {
+    this.displayData = [];
+    arr.map(item => {
+      for (const key of this.filterableKeys) {
+        if (this.searchStringValue[index] && item[key]) {
           //@ts-ignore
-          if (item[key].toLowerCase().includes(searchTerm.toLowerCase())) {
+          if (item[key].includes(this.searchStringValue[index].toLowerCase().trim())) {
             const tempObj = {};
             tempObj[key] = item[key];
-            returnObj.push(tempObj);
+            this.displayData.push(tempObj);
           }
         }
-      });
-      return returnObj;
-    }
-
+      }
+    })
+    return this.displayData;
   }
+
+
+
 
   displayDataHasKey(key) {
     let hasOwnKey;

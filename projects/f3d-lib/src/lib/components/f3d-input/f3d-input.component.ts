@@ -6,20 +6,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./f3d-input.component.scss']
 })
 export class F3dInputComponent implements OnInit {
-  @Input() width; 
+  @Input() width;
   @Output() clearChips = new EventEmitter();
-  @Output() searchString = new EventEmitter();
+  @Output() stringValue = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  clearEventEmitter(){
+  clearEventEmitter() {
     this.clearChips.emit();
   }
 
-  emitSearchString(searchString){
-    this.searchString.emit(searchString);
+  emitString(stringValue) {
+    console.log(stringValue)
+    this.stringValue.emit(stringValue);
   }
 }
