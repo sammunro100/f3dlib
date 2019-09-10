@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     width: 100%;
     position: relative;
+    z-index: 100;
 }
 
 .f3d-chip {
@@ -34,5 +35,9 @@
       align-self: center;
       font-size: 16px;
       margin-top: 2px;
+      &:hover{
+        cursor: pointer;
+        font-weight: bold;
+      }
   }
 }

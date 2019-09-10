@@ -13,6 +13,7 @@
     font-size: 14px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.78);
+    z-index: 100;
     @include standardizeFont();
     &-input{
         box-sizing: border-box;

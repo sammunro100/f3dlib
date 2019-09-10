@@ -4,6 +4,7 @@
     display: flex;
     width: 100%;
     position: relative;
+    z-index: 100;
 }
 
 .f3d-input{
@@ -16,6 +17,8 @@
     padding-right: 24px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.78);
+    position: relative;
+    z-index: 100;
     @include standardizeFont();
     &-clear{
         position: absolute;

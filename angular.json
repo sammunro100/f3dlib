@@ -21,7 +21,8 @@
           "options": {
             "main": "projects/f3d-lib/src/test.ts",
             "tsConfig": "projects/f3d-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/f3d-lib/karma.conf.js"
+            "karmaConfig": "projects/f3d-lib/karma.conf.js",
+            "codeCoverage": true 
           }
         },
         "lint": {

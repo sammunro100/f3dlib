@@ -1,29 +1,27 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'f3d-options-dropdown',
   templateUrl: './options-dropdown.component.html',
   styleUrls: ['./options-dropdown.component.scss']
 })
-export class OptionsDropdownComponent implements OnInit {
+export class OptionsDropdownComponent implements OnChanges {
 
   @Input() searchStringValue: [];
   @Input() dataSet: [];
   @Input() objectKeysConfig;
-  displayData = []
+  displayData: any[] = []; 
   @Output() chipValue = new EventEmitter();
   filterableKeys = ['name', 'tumour'];
   tempArr = [];
+  @Input() showOptions = false;
 
   constructor(
   ) { }
 
-  ngOnInit() {
-  }
-
   ngOnChanges() {
     if (this.searchStringValue && this.searchStringValue.length > 0) {
-     this.filter();
+      this.filter();
     }
   }
 
@@ -56,12 +54,9 @@ export class OptionsDropdownComponent implements OnInit {
           }
         }
       }
-    })
+    });
     return this.displayData;
   }
-
-
-
 
   displayDataHasKey(key) {
     let hasOwnKey;
@@ -72,5 +67,4 @@ export class OptionsDropdownComponent implements OnInit {
     });
     return hasOwnKey;
   }
-
 }

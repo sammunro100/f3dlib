@@ -8,9 +8,9 @@ describe('F3dInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ F3dInputComponent ]
+      declarations: [F3dInputComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +22,12 @@ describe('F3dInputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should emit the string value', () => {
+    component.stringValue.subscribe((res) => {
+      expect(res).toEqual('test');
+    });
+    component.emitString('test');
+  });
+
 });

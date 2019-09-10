@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ElementRef, ViewChildren, ContentChildren } from '@angular/core';
 
 @Component({
   selector: 'f3d-chips',
@@ -7,11 +7,12 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild } 
 })
 export class F3dChipsComponent implements OnInit, OnChanges {
 
-  @Input() chips;
+  @Input() chips = []
   @Output() searchString = new EventEmitter();
   @Output() chipQuery = new EventEmitter();
   chipQueryArray = [];
   currentSearchString: string;
+  inputReference: ElementRef;
 
   constructor(
   ) { }
@@ -20,7 +21,15 @@ export class F3dChipsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.buildChipQuery();
+    console.log(this.inputReference)
+    if(this.inputReference !== undefined){
+      this.buildChipQuery();
+    }
+  }
+
+  catchElementRef(element){
+    console.log('Hello?', element)
+    this.inputReference = element;
   }
 
   emitSearchString(searchString, event) {
@@ -29,14 +38,17 @@ export class F3dChipsComponent implements OnInit, OnChanges {
       this.currentSearchString = searchString;
       this.buildChipQuery();
     }
-
   }
 
   addChip(htmlElement: HTMLInputElement) {
     this.chips.push({ displayValue: htmlElement.value });
     htmlElement.value = '';
     this.currentSearchString = '';
+    // this.inputReference.nativeElement.value = '';
+    console.log(htmlElement);
+    console.log(this.inputReference)
     this.buildChipQuery();
+    this.inputReference.nativeElement.value = '';
   }
 
   removeChip(chip) {
@@ -52,7 +64,7 @@ export class F3dChipsComponent implements OnInit, OnChanges {
         this.chipQueryArray.push(chip.displayValue);
       });
     }
-    if (this.currentSearchString !== '') {
+    if (this.currentSearchString !== '' && this.inputReference.nativeElement !== undefined) {
       this.chipQueryArray.push(this.currentSearchString);
     }
     this.chipQuery.emit(this.chipQueryArray);

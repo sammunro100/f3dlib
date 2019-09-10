@@ -5,6 +5,7 @@
         <i class="material-icons f3d-chip-remove" (click)="removeChip(chip)">close</i>
     </div>
     <div style="flex: 1">
-        <f3d-input #f3dInput (keyup.enter)="addChip($event.target)" (keyup)="emitSearchString($event.target.value, $event)"></f3d-input>
+        <f3d-input class="f3d-input" #f3dInput (elementReference)="catchElementRef($event)" 
+        (keyup.enter)="addChip($event.target)" (keyup)="emitSearchString($event.target.value, $event)"></f3d-input>
     </div>
 </div>

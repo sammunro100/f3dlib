@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'f3d-input',
@@ -7,20 +7,25 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class F3dInputComponent implements OnInit {
   @Input() width;
+  @Output() elementReference = new EventEmitter();
   @Output() clearChips = new EventEmitter();
   @Output() stringValue = new EventEmitter();
+  @ViewChild('f3dInput', {static: false}) f3dInput: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
+    // this.elementReference.emit(this.f3dInput);
   }
 
-  clearEventEmitter() {
-    this.clearChips.emit();
+  ngAfterViewInit(){
+    this.elementReference.emit(this.f3dInput);
   }
+  // clearEventEmitter() {
+  //   this.clearChips.emit();
+  // }
 
   emitString(stringValue) {
-    console.log(stringValue)
     this.stringValue.emit(stringValue);
   }
 }
